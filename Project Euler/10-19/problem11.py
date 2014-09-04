@@ -24,3 +24,11 @@ input = """
 
 data = np.fromstring(input.strip(), dtype=np.uint8, sep=' ').reshape(20, 20)
 
+max_h = 0
+n = 4
+cur = 0 # first n digits multiplied
+row, col = data.shape
+
+# first get the max horizontal value
+for i in xrange(row):
+    for j in xrange(col):
