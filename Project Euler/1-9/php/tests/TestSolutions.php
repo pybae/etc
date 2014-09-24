@@ -3,6 +3,7 @@
 class SolutionsTest extends PHPUnit_Framework_TestCase
 {
   /**
+   * @strict
    * @small
    */
   public function testProblem1()
