@@ -1,0 +1,7 @@
+<phpunit 
+  colors="true"
+  strict="true"
+  timeOutForSmallTests="1"
+  timeOutForMediumTests="10"
+  timeOutForLargeTests="20">
+</phpunit>
