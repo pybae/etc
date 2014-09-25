@@ -12,7 +12,6 @@ def sieve_of_erathosthenes(n):
 
 n = 600851475143 
 i = 0
-max_factor = 2 # assuming n >= 2
 
 primes = sieve_of_erathosthenes(100000)
 while n > 1:
