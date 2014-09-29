@@ -19,6 +19,22 @@ class Solutions
     return $primes;
   }
 
+  private function prime_factors($limit) {
+    $factors = array();
+    $primes  = array();
+    $num = 2;
+
+    for ($i = 2; $i < $limit+1; $i++) {
+      if (!in_array($i, $factors) and $limit % $i === 0) {
+        if ($i*$i <= $limit)
+          $factors = $factors + range($i*$i, $limit, $i);
+        array_push($primes, $i);
+      }
+    }
+
+    return $primes;
+  }
+
   function Problem1()
   {
     $sum = 0;
@@ -91,34 +107,53 @@ class Solutions
     $max_prime_powers  = array();
 
     for ($i = 1; $i <= $n; $i++) {
-      $primes = $this->prime_values($i);
-      for ($j = 0; $j < count($primes); $j++) {
+      $factors = $this->prime_factors($i);
+      for ($j = 0; $j < count($factors); $j++) {
+        $factor = $factors[$j];
         $power = 0;
-        while ($i % $primes[$j] === 0) {
+
+        $temp = $i;
+        while ($temp % $factor === 0) {
           $power++;
-          $i /= $primes[$j];
+          $temp /= $factor;
         }
-        $index = array_search($primes[$j], $max_prime_factors);
-        if ($index and max_prime_powers[$index] < $power) {
-          $max_prime_powers[$index] = $power;
+
+        echo "The factor: ", $factor, " the power: ", $power, "\n";
+        print_r($max_prime_factors);
+        if (in_array($factor, $max_prime_factors)) {
+          $index = array_search($factor, $max_prime_factors);
+          if ($max_prime_powers[$index] < $power) {
+            $max_prime_powers[$index] = $power;
+          }
         }
         else {
-          array_push($max_prime_factors, $primes[$j]);
+          array_push($max_prime_factors, $factor);
           array_push($max_prime_powers, $power);
         }
       }
     }
-    
+
+    //print_r($max_prime_factors);
+    //print_r($max_prime_powers);
     $result = array_map(function ($a, $b) {
       return pow($a,$b);
     }, $max_prime_factors, $max_prime_powers);
 
-    return 0;
+    print_r($result);
+    
+    return array_product($result);
   }
 
   function Problem6()
   {
-    return 0;
+    $sum = 0;
+    $n = 100;
+    for ($i = 0; $i <= $n; $i++) {
+      for ($j = $i+1; $j <= $n; $j++) {
+        $sum += $i*$j;
+      }
+    }
+    return 2*$sum;
   }
 
   function Problem7()

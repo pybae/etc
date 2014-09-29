@@ -27,5 +27,8 @@ for i in xrange(1, n+1):
         else:
             max_prime_factors.append(a)
             max_prime_powers.append(power)
+print max_prime_factors
+print max_prime_powers
 l = [(x ** y) for (x, y) in zip(max_prime_factors, max_prime_powers)]
+print l
 print l, reduce(lambda x, y: x*y, l)
