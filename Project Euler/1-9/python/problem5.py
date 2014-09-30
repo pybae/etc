@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 def prime_factors(n):
+    """Here's a docstring!"""
     factors = set()
     primes = []
     for i in range(2, n+1):
