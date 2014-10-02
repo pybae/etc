@@ -4,16 +4,17 @@
 #include <vector>
 #include <queue>
 #include <typeinfo>
+#include <unordered_map>
 
 using namespace std;
 
-int eval(int startNode, int limit, map<int, vector<int> > edges)
+int eval(int startNode, int limit, unordered_map<int, vector<int> > edges)
 {
-    map<int, int> visited;
+    unordered_map<int, int> visited;
     queue<int> s;
     
     s.push(startNode);
-    visited[startNode]=0;
+    visited[startNode] = 0;
     
     while (!s.empty()) {
         int top = s.front();
@@ -28,14 +29,14 @@ int eval(int startNode, int limit, map<int, vector<int> > edges)
         }
     }
     
-    map <int,int>::const_iterator itr;
+    unordered_map <int,int>::const_iterator itr;
     int result = 0;
     for(itr = visited.begin(); itr != visited.end(); ++itr){
         if ((*itr).second>limit) {
             result++;
         }
    }
-   result += edges.size()-visited.size(); //Aaaaaah!!! The graph could has no connected nodes 
+   result += edges.size() - visited.size();
 
    return result;
 }
@@ -43,8 +44,9 @@ int eval(int startNode, int limit, map<int, vector<int> > edges)
 int main(int argc, const char *argv[])
 {
     int numNodes = 0;
+    int numCases = 0;
     while (cin >> numNodes && numNodes) {
-        map <int, vector<int> > edges;
+        unordered_map <int, vector<int> > edges;
         for (int i = 0; i < numNodes; i++) {
             int a, b;
             cin >> a;
@@ -54,13 +56,13 @@ int main(int argc, const char *argv[])
         }
     
         int startNode, limit;
-        int numCases;
         while ((cin >> startNode && cin >> limit) &&
-               (startNode != 0 && limit != 0)) { 
+               (startNode != 0 || limit != 0)) { 
             numCases++;
             int result = eval(startNode, limit, edges);
             cout << "Case " << numCases << ": " << result \
-                 << " nodes not reachable from node " << startNode << " with TTL = " << limit << endl;
+                 << " nodes not reachable from node " << startNode \
+                 << " with TTL = " << limit << "." << endl;
         }
     }
     return 0;
