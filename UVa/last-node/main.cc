@@ -34,8 +34,9 @@ int eval(int startNode, int limit, map<int, vector<int> > edges)
         if ((*itr).second>limit) {
             result++;
         }
-   }
-   result += edges.size()-visited.size(); //Aaaaaah!!! The graph could has no connected nodes 
+    }
+    
+   result += edges.size()-visited.size();
 
    return result;
 }
@@ -54,7 +55,7 @@ int main(int argc, const char *argv[])
         }
     
         int startNode, limit;
-        int numCases;
+        int numCases = 0;
         while ((cin >> startNode && cin >> limit) &&
                (startNode != 0 && limit != 0)) { 
             numCases++;
