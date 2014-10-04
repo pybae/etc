@@ -1,0 +1,63 @@
+"""
+Solves the cover stains problem:
+Input first line
+N, K
+and then pairs of stains (x, y)
+"""
+
+PAIRS = set()
+def getPairs(k, edge, stains):
+    if len(edge) > k:
+        return 0
+    if len(edge) == k:
+        PAIRS.add((stains.index(edge)))
+    
+    for i in xrange(len(edge), k):
+        result *= len(stains) - len(edge)
+    return result
+
+def solve(n, k, stains):
+    x_vals, y_vals = zip(*stains)
+
+    x_min = min(x_vals)
+    x_max = max(x_vals)
+    y_min = min(y_vals)
+    y_max = max(y_vals)
+
+    # get the set of points corresponding to each edge
+    left_edge = []
+    right_edge = []
+    bottom_edge = []
+    top_edge = []
+    for tup in stains:
+        x, y = tup
+        if x == x_min:
+            left_edge.append(tup)
+        elif x == x_max:
+            right_edge.append(tup)
+        if y == y_min:
+            bottom_edge.append(tup)
+        elif y == y_max:
+            top_edge.append(tup)
+
+    print left_edge
+    print right_edge
+    print bottom_edge
+    print top_edge
+    
+    print getPairs(k, left_edge, stains)
+    print getPairs(k, right_edge, stains)
+    print getPairs(k, bottom_edge, stains)
+    print getPairs(k, top_edge, stains)
+
+    return -1
+
+
+A = raw_input().split()
+N, K = int(A[0]), int(A[1])
+STAINS = []
+for i in xrange(N):
+    S = raw_input().split()
+    STAINS.append((int(S[0]), int(S[1])))
+
+print solve(N, K, STAINS)
