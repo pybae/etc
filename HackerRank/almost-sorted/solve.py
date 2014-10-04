@@ -1,25 +1,33 @@
-def solve(list):
-    # look for swaps
+def look_for_swap(list):
     i = 0
-    sorted_list = sorted(list)
-    while i < len(list):
-        # found something out of order
-        if (sorted_list[i] != list[i]):
-            start_idx = i
-            end_idx = i + 1
-            while end_idx < len(list):
-                # we might be able to fix this with a swap
-                if (start_idx == 0 or list[start_idx] < list[end_idx]) and \
-                   (start_idx == len(list)-1 or list[start_idx+1] > list[end_idx]):
-                    print "Found a swap"
-                end_idx += 1
-        i += 1
-    
+    out_of_order = False
+    while i < len(list)-1:
+        if out_of_order:
+            return False
+        out_of_order = True
+        if list[i+1] < list[i]: # out of order
+            j = i + 1
+            while j < len(list):
+                if (i == 0 or list[i-1] <= list[j]) and \
+                   (list[i+1] >= j):
+                    if (list[j-1] <= list[i]) and \
+                       (j == len(list)-1 or list[j+1] >= list[i]):
+                        print "yes"
+                        print "swap", i+1, j+1
+                        return True
+                j += 1
+            i += 1
 
+    if not out_of_order:
+        print "no"
+        return True
+    return False
+
+def look_for_reverse(list):
     # look for reverses
     i = 0
     has_reverse = False
-    
+
     start_idx  = 0
     end_idx    = 0
     while i < len(list) - 1:
@@ -36,9 +44,6 @@ def solve(list):
                   list[end_idx+1] < list[end_idx]:
                 end_idx += 1
             section = list[start_idx:end_idx+1]
-#            print section
-#            print start_idx
-#            print end_idx
 
             # we might be able to fix this with a reverse
             if (start_idx == 0 or section[-1] > list[start_idx-1]) and \
@@ -52,8 +57,13 @@ def solve(list):
             i += 1
 
     print "yes"
-    if has_reverse:
-        print "reverse " + str(start_idx+1) + " " + str(end_idx+1)
+    print "reverse", start_idx+1, end_idx+1
+
 NUM_INTS = raw_input()
 NUMS = map(int, raw_input().strip().split(' '))
-solve(NUMS)
+# COUNT = count_out_of_ordered(NUMS)
+
+#elif COUNT < 2:
+#    # look for swaps
+if not look_for_swap(NUMS):
+    look_for_reverse(NUMS)

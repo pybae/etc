@@ -16,13 +16,11 @@ def getPairs(k, edge, stains):
         result *= len(stains)-len(edge)
     return result
 
-def findOverlap(a, b):
-    i = 0
-    while i < len(a) and i < len(b):
-        if a[i] == b[i]:
-            return 1
-        i += 1
-    return 0
+def findOverlap(k, a, b):
+    if len(a) == k:
+        return 0
+    intersect = set(a).intersection(set(b))
+    return len(intersect)
 
 def solve(n, k, stains):
     x_vals, y_vals = zip(*stains)
@@ -48,15 +46,20 @@ def solve(n, k, stains):
         elif y == y_max:
             top_edge.append(idx)
 
-    top_left = findOverlap(left_edge, top_edge)
-    top_right = findOverlap(right_edge, top_edge)
-    bottom_left = findOverlap(left_edge, bottom_edge)
-    bottom_right = findOverlap(right_edge, bottom_edge)
+#    print left_edge
+#    print right_edge
+#    print top_edge
+#    print bottom_edge
 
-    print top_left
-    print top_right
-    print bottom_left
-    print bottom_right
+    top_left = findOverlap(k, left_edge, top_edge)
+    top_right = findOverlap(k, right_edge, top_edge)
+    bottom_left = findOverlap(k, left_edge, bottom_edge)
+    bottom_right = findOverlap(k, right_edge, bottom_edge)
+
+#    print top_left
+#    print top_right
+#    print bottom_left
+#    print bottom_right
 
     # get all pairs (including duplicates)
     result = getPairs(k, left_edge, stains)   + \
