@@ -8,15 +8,33 @@
   
   <body>
     <h1>Rango says hello world!</h1>
+    Categories: <br />
     {% if categories %}
       <ul>
         {% for category in categories %}
-          <li>{{ category.name }}</li>
+        <li>
+          <a href="/rango/category/{{ category.url }}">
+            {{ category.name }}
+          </a>
+        </li>
         {% endfor %}
       </ul>
     {% else %}
       <strong>There are no categories present.</strong>
     {% endif %}
+  
+    Pages: <br />
+    {% if pages %}
+    <ul>
+      {% for page in pages %}
+      <li>
+        <a href="{{ page.url }}">{{ page.title }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
     <a href="/rango/about/">About</a><br />
+    <a href="/rango/add_category">Add a New Category</a><br />
   </body>
 </html>

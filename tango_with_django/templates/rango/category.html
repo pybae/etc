@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Category</title>
+</head>
+<body>
+  <h1>{{category_name}}</h1>
+  {% if category %}
+    {% if pages %}
+    <ul>
+      {% for page in pages %}
+      <li>
+        <a href="{{ page.url }}">{{ page.title }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %} 
+      <strong>No pages in current mapping!</strong>
+    {% endif %}
+  {% else %}
+    The specified category {{ category_name }} does not exist!
+  {% endif %}
+</body>
+</html>
