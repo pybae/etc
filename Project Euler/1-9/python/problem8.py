@@ -10,6 +10,7 @@ number = number.strip()
 
 current = 0
 max_v = 0
+
 # iterate through the number
 # if the algorithm finds a 0 it resets the starting digit of the sequence
 # to the digit immediately after the 0
