@@ -13,8 +13,7 @@ int main(int argc, const char *argv[])
         std::cout << "Please specify one filename" << std::endl;
         return -1;
     }
-    
-    Mat im = imread(argv[1], CV_LOAD_IMAGE_GRAYSCALE);
+
     Mat output;
     threshold(im, output, 0, 255, CV_THRESH_BINARY | CV_THRESH_OTSU);
 
