@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 
         if (y >= n - k) {
             puts("YES");
-            return -1;
+            return 0;
         }
 
         // try to move downwards
