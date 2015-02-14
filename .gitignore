@@ -1,3 +1,15 @@
 **/a.out
 **/composer.lock
 **/vendor
+
+**/*.class
+*.class
+
+**/*.pyc
+*.pyc
+
+**/*.out
+*.out
+
+/LeetCode/Node.class
+/LeetCode/TwoSum.class
