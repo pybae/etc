@@ -1,32 +1,32 @@
 #include <cstdio>
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
-int n, r, avg;
-int grade, essay;
+long long n, r, avg;
+long long grade, essay;
 
 struct Exam {
-    int essay;
-    int grade;
+    long long essay;
+    long long grade;
 };
 
 // can sort by global array reference
 bool compareExams(Exam a, Exam b) {
-    return a.essay <= b.essay;
+    return a.essay < b.essay;
 }
 
 int main(int argc, char *argv[])
 {
     cin >> n >> r >> avg;
 
-    int sum = 0;
-
+    long long sum = 0;
     vector<Exam> exams(n);
     for (int i = 0; i < n; i++) {
         cin >> grade >> essay;
-        sum += grade;
+        sum  += grade;
 
         exams[i].grade = grade;
         exams[i].essay = essay;
@@ -39,17 +39,14 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    // the points I need
-    int deficit = avg * n - sum;
-    int count   = 0;
+    long long deficit = avg * n - sum;
+    long long count   = 0;
+    long long gap     = 0;
 
-    for (int i = 0; i < n; i++) {
-        if (deficit - r + exams[i].grade <= 0) {
-            count += deficit * exams[i].essay;
-            break;
-        }
-        deficit -= r - exams[i].grade;
-        count += (r - exams[i].grade) * exams[i].essay;
+    for (int i = 0; deficit > 0; i++) {
+        gap = min(r - exams[i].grade, deficit);
+        count += gap * exams[i].essay;
+        deficit -= gap;
     }
 
     cout << count << endl;
