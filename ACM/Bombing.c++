@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
     while (t--) {
         cin >> c >> n >> m;
 
+
         map<pair<int, int>, int> mp;
 
         for (int i = 0; i < c; i++) {
