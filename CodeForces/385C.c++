@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <set>
+#include <algorithm>
 
 using namespace std;
 vector<int> primeFactors(int n)
@@ -55,8 +56,8 @@ int main(int argc, char *argv[])
         int sum = 0;
         for (int j = 0; j < n; j++) {
             vector<int> v = x[j];
-            int l_bound = std::lower_bound(v.begin(), v.end(), l) - v.begin();
-            int r_bound = std::upper_bound(v.begin(), v.end(), r) - v.begin();
+            int l_bound = lower_bound(v.begin(), v.end(), l) - v.begin();
+            int r_bound = upper_bound(v.begin(), v.end(), r) - v.begin();
 
             sum += r_bound - l_bound;
         }
