@@ -5,10 +5,20 @@
 #include <iostream>
 #include <set>
 #include <algorithm>
+#include <map>
 
 using namespace std;
+
+map<int, vector<int> > cache;
+
 vector<int> primeFactors(int n)
 {
+    int temp = n;
+
+    if (cache.find(n) != cache.end()) {
+        return cache[n];
+    }
+
     set<int> factors;
     if (n % 2 == 0) {
         factors.insert(2);
@@ -31,7 +41,8 @@ vector<int> primeFactors(int n)
         factors.insert(n);
     }
 
-    return vector<int>(factors.begin(), factors.end());
+    cache[temp] = vector<int>(factors.begin(), factors.end());
+    return cache[temp];
 }
 
 int n;
